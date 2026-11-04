@@ -1,0 +1,36 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: littera
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - dados-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d littera"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  api:
+    build: .   # Aponta para a pasta atual onde está o Dockerfile
+    depends_on:
+      db:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: jdbc:postgresql://db:5432/littera
+      DDL_AUTO: validate
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      PORT: 8080
+      DEEPL_API_KEY: ${DEEPL_API_KEY} # Lê diretamente do seu ficheiro .env ou do ambiente
+    ports:
+      - "8080:8080"
+
+volumes:
+  dados-postgres:
