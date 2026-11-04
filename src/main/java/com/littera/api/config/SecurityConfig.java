@@ -89,7 +89,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET,"/api/open-library/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/api/traducao/portugues").hasRole("ADMIN")
                         .requestMatchers("/api/open-library/**", "/api/periodicos/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        // .anyRequest().authenticated()
                 )
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
