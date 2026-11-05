@@ -49,8 +49,9 @@ dependencies {
 	// documentacao de api
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'
 
-	// banco de dados
-	implementation 'org.flywaydb:flyway-core:6.4.3'
+	// Banco de dados & Migrações (Flyway)
+	implementation 'org.springframework.boot:spring-boot-starter-flyway'
+	runtimeOnly 'org.flywaydb:flyway-database-postgresql'
 }
 
 tasks.named('test') {
