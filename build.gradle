@@ -45,6 +45,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-webmvc-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 
 	// documentacao de api
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'
