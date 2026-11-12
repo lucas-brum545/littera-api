@@ -3,8 +3,6 @@ package com.littera.api.controller;
 import com.littera.api.dto.EmprestimoRequest;
 import com.littera.api.dto.EmprestimoResponse;
 import com.littera.api.dto.EmprestimoResumo;
-import com.littera.api.model.Emprestimo;
-import com.littera.api.repository.EmprestimoRepository;
 import com.littera.api.service.EmprestimoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,14 +20,6 @@ public class EmprestimoController {
         this.emprestimoService = emprestimoService;
     }
 
-
-    @GetMapping("/{id}")
-    public ResponseEntity<EmprestimoResumo> buscarPorId(@PathVariable Long id) {
-        return emprestimoService.buscarPorIdResumo(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
     @GetMapping
     public ResponseEntity<List<EmprestimoResponse>> listarTodos() {
         return ResponseEntity.ok(emprestimoService.listarTodos());
@@ -40,6 +30,14 @@ public class EmprestimoController {
         return ResponseEntity.ok(emprestimoService.buscarId(codigo));
     }
 
+    // Antes era "/{id}", o mesmo caminho de "/{codigo}": o Spring não sobe com mapeamentos duplicados.
+    @GetMapping("/{id}/resumo")
+    public ResponseEntity<EmprestimoResumo> buscarPorId(@PathVariable Long id) {
+        return emprestimoService.buscarPorIdResumo(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PostMapping
     public ResponseEntity<EmprestimoResponse> criar(@RequestBody EmprestimoRequest request) {
         EmprestimoResponse novoEmprestimo = emprestimoService.salvar(request);
@@ -48,8 +46,7 @@ public class EmprestimoController {
 
     @PutMapping("/{codigo}")
     public ResponseEntity<EmprestimoResponse> atualizar(@PathVariable Long codigo, @RequestBody EmprestimoRequest request) {
-        EmprestimoResponse emprestimoAtualizado = emprestimoService.atualizar(codigo, request);
-        return ResponseEntity.ok(emprestimoAtualizado);
+        return ResponseEntity.ok(emprestimoService.atualizar(codigo, request));
     }
 
     @DeleteMapping("/{codigo}")

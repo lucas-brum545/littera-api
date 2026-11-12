@@ -62,7 +62,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/actuator/health").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/auth/login", "/auth/login").permitAll()
                         // LIBERA ESTAS ROTAS PUBLICAMENTE (Sem token/login)
-                        .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/usuarios/**", "/usuarios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.PUT, "/api/usuarios/**", "/usuarios/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.GET, "/api/usuarios/**", "/usuarios/**").hasRole("ADMIN")
@@ -102,7 +101,6 @@ public class SecurityConfig {
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOriginPatterns(origensPermitidas);
-        configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));
 

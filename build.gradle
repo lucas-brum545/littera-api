@@ -46,6 +46,11 @@ dependencies {
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	// Suas outras dependências normais...
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Dependência oficial de testes do Spring Boot
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// documentacao de api
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:3.2.0'

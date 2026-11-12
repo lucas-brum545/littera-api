@@ -62,6 +62,14 @@ class AuthControllerTest {
         }).when(securityFilter).doFilter(any(), any(), any());
     }
 
+    @Test
+    void login() {
+    }
+
+    @Test
+    void registerUser() {
+    }
+
     // =========================================================================
     // REGISTRO DE USUARIO
     // =========================================================================
